@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/edittext_nome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="Coberturar"
+            style="@style/HeaderTextStyle"
+            android:layout_marginTop="15dp"/>
+        <CheckBox
+            android:id="@+id/checkbox_chantilly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="19dp"
+            android:textSize="16sp"
+            android:text="Chantilly"/>
+        <CheckBox
+            android:id="@+id/checkbox_chocolate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="19dp"
+            android:textSize="16sp"
+            android:text="Chocolate"/>
+        <TextView
+            android:text="Quantidade"
+            style="@style/HeaderTextStyle" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="decrement"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:textSize="20dp"
+                android:text="-" />
+            <TextView
+                android:id="@+id/quantity_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="#000000"
+                android:text="0" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="increment"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:text="+" />
+        </LinearLayout>
+        <TextView
+            android:text="Resumo da oredem de Serviço"
+            style="@style/HeaderTextStyle"/>
+        <TextView
+            android:id="@+id/ordem_text_view"
+            android:text="R$0"
+            style="@style/HeaderTextStyle"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="submitOrder"
+            android:text="ORDEM" />
+    </LinearLayout>
+</ScrollView>
+
