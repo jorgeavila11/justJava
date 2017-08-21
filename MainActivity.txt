@@ -1,0 +1,88 @@
+package com.example.jorge.justjava;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
+public class MainActivity extends AppCompatActivity {
+    int quantity = 0;
+    CheckBox hasChantilly,hasChocolate;
+    EditText nome;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+    public void increment(View view) {
+        quantity = quantity + 1;
+        display(quantity);
+    }
+    /**
+     * This method is called when the minus button is clicked.
+     */
+    public void decrement(View view) {
+        quantity = quantity - 1;
+        display(quantity);
+    }
+    /**
+     * This method is called when the order button is clicked.
+     */
+    public void submitOrder(View view) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this        
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java ordem de serviço"+ nome);
+        intent.putExtra(Intent.EXTRA_TEXT,resumo());
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        displayMessage(resumo());
+        
+    }
+    private int calcularPreco(){
+        int preco = 0;
+        if(hasChantilly.isChecked()) {
+            preco = preco + 1;
+        }if(hasChocolate.isChecked()) {
+            preco = preco + 1;
+        }
+        return preco + (quantity * 5);
+    }
+   
+  
+    private String resumo(){
+        hasChantilly = (CheckBox) findViewById(R.id.checkbox_chantilly);
+        hasChocolate = (CheckBox) findViewById(R.id.checkbox_chocolate);
+        nome = (EditText) findViewById(R.id.edittext_nome);
+        String msge = "Nome: " + nome.getText().toString();
+        if(hasChantilly.isChecked()){
+            msge += "\n adicionar Chantilly? true";
+        }else{
+            msge += "\n adicionar Chantilly? false" ;
+        }
+        if(hasChocolate.isChecked()){
+            msge += "\n adicionar Chocolate? true";
+        }else{
+            msge += "\n adicionar Chocolate? false" ;
+        }
+        msge += "\n Quantidade: " + quantity;
+        msge += "\n Preço: R$ " + calcularPreco();
+        msge += "\n Obrigado!";
+        return msge;
+    }
+    /**
+     * This method displays the given quantity value on the screen.
+     */
+    private void display(int number) {
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        quantityTextView.setText("" + number);
+    }
+    
+    private void displayMessage(String mensagem) {
+        TextView ordemTextView = (TextView) findViewById(R.id.ordem_text_view);
+        ordemTextView.setText(mensagem);
+    }
+}
+
